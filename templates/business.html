@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <head>
     <h1>Simpl News</h1>
-    <h2>Business</h2>
+    <h2>Business News</h2>
 </head>
 <body>
+    {% for url in page_urls %}
+        <li><a href="{{ url_for('static', filename=url) }}">{{ page_urls[url].title }}</a>{{ page_urls[url].sub }}</li>
+    {% endfor %}
 </body>
 </html>

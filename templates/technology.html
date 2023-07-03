@@ -4,5 +4,8 @@
     <h2>Technology</h2>
 </head>
 <body>
+    {% for url in page_urls %}
+        <li><a href="{{ url_for('static', filename=url) }}">{{ page_urls[url].title }}</a>{{ page_urls[url].sub }}</li>
+    {% endfor %}
 </body>
 </html>

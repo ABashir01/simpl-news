@@ -1,4 +1,9 @@
 #TODO: Consider finding a way to remove world/europe, world/india, etc. from titles
+#TODO: Avoid hard-coding stuff, like file paths, in so that it is more generalizable and easier to modify
+#TODO: Make a JSON file that stores stuff that I want to avoid hard-coding, like filepaths and which news sites to use
+#TODO: Add author name + date info and stuff on pages
+#TODO: In Reuters, the top story on a page is in h3 tags instead of li. Make it catchable.
+#TODO: Handle the mystery characters
 
 
 import bs4
@@ -8,6 +13,8 @@ import os
 import shutil
 
 app = flask.Flask(__name__)
+
+
 
 def reuters_main_page_parser() -> dict:
     section_map = {}
@@ -42,7 +49,7 @@ def reuters_section_parser_helper(soup) -> dict:
         if link_element and title_element and time_element:
             title = title_element.find("a").text
             time = time_element.text
-            time = time.replace(" . Updated ago", "")
+            time = time.rstrip(" . Updated ago")
             link_segment = link_element["href"]
             ret_map[link_segment[:-1]] = {"title" : title, "sub" : " - Reuters" + " (" + time + ")"}
 
@@ -58,20 +65,22 @@ def reuters_section_parser(section_map) -> dict:
         
     return ret_map
     
-def reuters_page_former(map):
+def reuters_page_former(map, section) -> dict:
+    ret_map = {}
+    section_map = map[section]
 
-
-    for key in map:
+    for key in section_map:
         # temp = key.replace('/', '___')
         # temp = temp[3:]
         temp = key.split('/')[-1]
-        filepath = "pages/world_pages/" + temp + ".html"
-        print(filepath)
-        
-        # try:
-        #     f = open(filepath, 'x')
-        # except:
-        #     continue
+        filepath = "static/" + section + "_pages/" + temp + ".html"
+        ret_key = section + "_pages/" + temp + ".html"         
+
+        try:
+            f = open(filepath, 'x')
+        except:
+            ret_map[ret_key] = section_map[key]
+            continue
         
         link = requests.get("https://www.reuters.com" + key)
         link_soup = bs4.BeautifulSoup(link.text, "lxml")
@@ -82,14 +91,47 @@ def reuters_page_former(map):
             element_text = element.text
             temp = "<p>" + element_text + "</p>"
             new_string += temp
-        to_write = "<!DOCTYPE html><head><h1>Simpl News</h1></head><body>" + new_string + "</body></html>"
-        
-        # f.write(to_write)
-        # f.close()
+        to_write = "<!DOCTYPE html><head><h1>Simpl News</h1><h2>" + section.capitalize() + " News</h2></head><body>" + new_string + "</body></html>"
         
 
+        
+        f.write(to_write)
+        f.close()
+
+        
+        ret_map[ret_key] = section_map[key]
+
+    return ret_map
 
 
-new_map = reuters_main_page_parser()
-sec_map = reuters_section_parser(new_map)
-reuters_page_former(sec_map["world"])
+section_map = reuters_main_page_parser()
+sec_map = reuters_section_parser(section_map)
+        
+@app.route("/")
+def index():
+    return flask.render_template('index.html')
+
+@app.route("/world")
+def world():
+    page_urls = reuters_page_former(sec_map, "world")
+    return flask.render_template('world.html', page_urls = page_urls)
+
+@app.route("/technology")
+def technology():
+    page_urls = reuters_page_former(sec_map, "technology")
+    return flask.render_template('technology.html', page_urls = page_urls)
+
+@app.route("/business")
+def business():
+    page_urls = reuters_page_former(sec_map, "business")
+    return flask.render_template('business.html', page_urls = page_urls)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+    # section_map = reuters_main_page_parser()
+    # sec_map = reuters_section_parser(section_map)
+    # print(sec_map.keys())
+    # # page_urls = reuters_page_former(sec_map["world"])
+    # # print(page_urls.keys())
+
