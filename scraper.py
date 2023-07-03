@@ -5,14 +5,16 @@
 #TODO: In Reuters, the top story on a page is in h3 tags instead of li. Make it catchable.
 #TODO: Handle the mystery characters
 
-
+import sys
 import bs4
 import requests
 import flask
+import flask_frozen
 import os
 import shutil
 
 app = flask.Flask(__name__)
+freezer = flask_frozen.Freezer(app)
 
 
 
@@ -30,9 +32,9 @@ def reuters_main_page_parser() -> dict:
         if link_element:
             link_segment = link_element["href"]
             if "https://www.reuters.com" not in link_segment:
-                link_segment = link_segment[1:-1]
+                link_segment = link_segment[1:-1] #TODO: MOVED LINK SEGMENT HERE, CHECK IF FINE
                 section_map[link_segment] = "https://www.reuters.com/" + link_segment
-
+            
     return section_map
 
 def reuters_section_parser_helper(soup) -> dict:
@@ -128,7 +130,12 @@ def business():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    if len(sys.argv) > 1 and sys.argv[1] == "build":
+        freezer.freeze()
+    else:
+        app.run(debug=True)
+
     # section_map = reuters_main_page_parser()
     # sec_map = reuters_section_parser(section_map)
     # print(sec_map.keys())
