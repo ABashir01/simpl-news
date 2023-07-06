@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <head>
-    <h1>Simpl News</h1>
-    <h2>Business News</h2>
+    <link rel="stylesheet" href="{{url_for('static', filename='stylesheets/style.css')}}">
+    <div class="header">
+        <h1><a href="{{ url_for('index')}}" class="simpl">Simpl News</a></h1>
+    </div>
+    
 </head>
 <body>
-    {% for url in page_urls %}
-        <li><a href="{{ url_for('static', filename=url) }}">{{ page_urls[url].title }}</a>{{ page_urls[url].sub }}</li>
-    {% endfor %}
+    <div class="container">
+        <h2><a href="{{ url_for('business')}}" class="section-title">Business</a></h2>
+        <ul>
+            {% for url in page_urls %}
+                <li><a href="{{ url_for('static', filename=url) }}">{{ page_urls[url].title }}</a>{{ page_urls[url].sub }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>

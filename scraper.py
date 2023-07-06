@@ -4,6 +4,11 @@
 #TODO: Add author name + date info and stuff on pages
 #TODO: In Reuters, the top story on a page is in h3 tags instead of li. Make it catchable.
 #TODO: Handle the mystery characters
+#TODO: Change "world pages" to "world" in static directory and so on
+#TODO: Make links change color when clicked
+#TODO: Fix author + date bug
+
+#TODO: #TODO: #TODO: IMPLEMENT TIMER SO THAT IT UPDATES EVERY HOUR + ADD A CLEAN-UP FUNCTION EVERY FEW DAYS (EVERY DAY?) (Should it archive??)
 
 import sys
 import bs4
@@ -15,6 +20,7 @@ import shutil
 
 app = flask.Flask(__name__)
 freezer = flask_frozen.Freezer(app)
+app.static_folder = 'static'
 
 
 
@@ -40,6 +46,7 @@ def reuters_main_page_parser() -> dict:
 def reuters_section_parser_helper(soup) -> dict:
     ret_map = {}
 
+    
     li_elements = soup.find_all('li')
 
     for element in li_elements:
@@ -63,13 +70,15 @@ def reuters_section_parser(section_map) -> dict:
     for title, link in section_map.items():
         sec_request = requests.get(link)
         sec_soup = bs4.BeautifulSoup(sec_request.text, "lxml")
-        ret_map[title] = reuters_section_parser_helper(sec_soup) 
+        ret_map[title] = reuters_section_parser_helper(sec_soup)
         
     return ret_map
     
 def reuters_page_former(map, section) -> dict:
     ret_map = {}
+
     section_map = map[section]
+
 
     for key in section_map:
         # temp = key.replace('/', '___')
@@ -79,13 +88,23 @@ def reuters_page_former(map, section) -> dict:
         ret_key = section + "_pages/" + temp + ".html"         
 
         try:
-            f = open(filepath, 'x')
+            f = open(filepath, 'x', encoding="utf-8")
         except:
             ret_map[ret_key] = section_map[key]
             continue
         
         link = requests.get("https://www.reuters.com" + key)
         link_soup = bs4.BeautifulSoup(link.text, "lxml")
+        article_author = link_soup.find('a', class_="text__text__1FZLe text__dark-grey__3Ml43 text__medium__1kbOh text__small__1kGq2 link__underline_on_hover__2zGL4 author-name__author__1gx5k")
+        if not article_author:
+            article_author = ""
+        else:
+            article_author = article_author.text
+        article_date = link_soup.find('span', class_="date-line__date__23Ge-")
+        if not article_date:
+            article_date = ""
+        else:
+            article_date = article_date.text
         paragraphs = link_soup.find_all('p', class_='text__text__1FZLe text__dark-grey__3Ml43 text__regular__2N1Xr text__large__nEccO body__full_width__ekUdw body__large_body__FV5_X article-body__element__2p5pI')
         
         new_string = ""
@@ -93,7 +112,21 @@ def reuters_page_former(map, section) -> dict:
             element_text = element.text
             temp = "<p>" + element_text + "</p>"
             new_string += temp
-        to_write = "<!DOCTYPE html><head><h1>Simpl News</h1><h2>" + section.capitalize() + " News</h2></head><body>" + new_string + "</body></html>"
+        to_write = """
+        <!DOCTYPE html>
+        <head>
+            <link rel="stylesheet" href="../stylesheets/style.css" >
+            <div class="header">
+                <h1><a href="/" class="simpl">Simpl News</a></h1>
+            </div>
+        </head>
+        <body>
+            <div class="flex-container">
+            <div class="column"></div>
+            <div class="content"><h2><a href="/""" + section + """" class="section-title">""" + section.capitalize() + '</a></h2>' + '<h3>' + article_author + ' • ' + article_date + '</h3>' + new_string + """<h3>Source: Reuters<h3></div>
+            <div class="column"></div>
+        </body>
+        </html>"""
         
 
         
@@ -102,12 +135,26 @@ def reuters_page_former(map, section) -> dict:
 
         
         ret_map[ret_key] = section_map[key]
+        ret_map[ret_key]["author"] = article_author
+        ret_map[ret_key]["date"] = article_date
 
     return ret_map
 
+# def running_app() -> dict:
+#     section_map = reuters_main_page_parser()
+#     sec_map = reuters_section_parser(section_map)
+#     return reuters_page_former(sec_map)
 
-section_map = reuters_main_page_parser()
-sec_map = reuters_section_parser(section_map)
+def page_combiner() -> dict:
+    section_map = reuters_main_page_parser()
+    sec_map = reuters_section_parser(section_map)
+    ret_map = {}
+    for section in sec_map:
+        ret_map[section] = reuters_page_former(sec_map, section)
+    return ret_map
+
+
+
         
 @app.route("/")
 def index():
@@ -115,26 +162,29 @@ def index():
 
 @app.route("/world")
 def world():
-    page_urls = reuters_page_former(sec_map, "world")
+    # page_urls = reuters_page_former(sec_map, "world")
+    page_urls = full_map.get("world", {})
     return flask.render_template('world.html', page_urls = page_urls)
 
 @app.route("/technology")
 def technology():
-    page_urls = reuters_page_former(sec_map, "technology")
+    # page_urls = reuters_page_former(sec_map, "technology")
+    page_urls = full_map.get("technology", {})
     return flask.render_template('technology.html', page_urls = page_urls)
 
 @app.route("/business")
 def business():
-    page_urls = reuters_page_former(sec_map, "business")
+    # page_urls = reuters_page_former(sec_map, "business")
+    page_urls = full_map.get("business", {})
     return flask.render_template('business.html', page_urls = page_urls)
 
 
 if __name__ == "__main__":
 
-    if len(sys.argv) > 1 and sys.argv[1] == "build":
-        freezer.freeze()
-    else:
-        app.run(debug=True)
+    # if len(sys.argv) > 1 and sys.argv[1] == "build":
+    full_map = page_combiner()
+    freezer.freeze()
+    app.run(debug=True)
 
     # section_map = reuters_main_page_parser()
     # sec_map = reuters_section_parser(section_map)
