@@ -6,7 +6,7 @@
 #TODO: Handle the mystery characters
 #TODO: Change "world pages" to "world" in static directory and so on
 #TODO: Make links change color when clicked
-#TODO: Fix author + date bug
+#TODO: Generalize the code and add fields + diff functions that make it customize diff parts for Reuters or APNews for example
 
 #TODO: #TODO: #TODO: IMPLEMENT TIMER SO THAT IT UPDATES EVERY HOUR + ADD A CLEAN-UP FUNCTION EVERY FEW DAYS (EVERY DAY?) (Should it archive??)
 
@@ -85,7 +85,8 @@ def reuters_page_former(map, section) -> dict:
         # temp = temp[3:]
         temp = key.split('/')[-1]
         filepath = "static/" + section + "_pages/" + temp + ".html"
-        ret_key = section + "_pages/" + temp + ".html"         
+        ret_key = section + "_pages/" + temp + ".html"
+        article_link = "https://www.reuters.com" + key        
 
         try:
             f = open(filepath, 'x', encoding="utf-8")
@@ -93,7 +94,7 @@ def reuters_page_former(map, section) -> dict:
             ret_map[ret_key] = section_map[key]
             continue
         
-        link = requests.get("https://www.reuters.com" + key)
+        link = requests.get(article_link)
         link_soup = bs4.BeautifulSoup(link.text, "lxml")
         article_author = link_soup.find('a', class_="text__text__1FZLe text__dark-grey__3Ml43 text__medium__1kbOh text__small__1kGq2 link__underline_on_hover__2zGL4 author-name__author__1gx5k")
         if not article_author:
@@ -105,8 +106,7 @@ def reuters_page_former(map, section) -> dict:
             article_date = ""
         else:
             article_date = article_date.text
-        paragraphs = link_soup.find_all('p', class_='text__text__1FZLe text__dark-grey__3Ml43 text__regular__2N1Xr text__large__nEccO body__full_width__ekUdw body__large_body__FV5_X article-body__element__2p5pI')
-        
+        paragraphs = link_soup.find_all('p', class_='text__text__1FZLe text__dark-grey__3Ml43 text__regular__2N1Xr text__small__1kGq2 body__full_width__ekUdw body__small_body__2vQyf article-body__element__2p5pI')
         new_string = ""
         for element in paragraphs:
             element_text = element.text
@@ -123,7 +123,7 @@ def reuters_page_former(map, section) -> dict:
         <body>
             <div class="flex-container">
             <div class="column"></div>
-            <div class="content"><h2><a href="/""" + section + """" class="section-title">""" + section.capitalize() + '</a></h2>' + '<h3>' + article_author + ' • ' + article_date + '</h3>' + new_string + """<h3>Source: Reuters<h3></div>
+            <div class="content"><h2><a href="/""" + section + """" class="section-title">""" + section.capitalize() + '</a></h2>' + '<h3>' + section_map[key]['title'] + '</h3><h4>' + article_author + ' • ' + article_date + '</h4><hr>' + new_string + """<hr><h3>Source: <a href='""" + article_link + """'>Reuters</a><h3></div>
             <div class="column"></div>
         </body>
         </html>"""
