@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+    <div class="header">
+        <h1><a href="/" class="simpl">Simpl News</a></h1>
+    </div>
+    
+</head>
+<body>
+    <div class="container">
+        <h2><a href="/business" class="section-title">Business</a></h2>
+        <ul>
+            
+                <li><a href="/static/business_pages/elon-musks-ai-firm-xai-launches-website-2023-07-12.html">Elon Musk takes aim at OpenAI with xAI launch</a> - Reuters (6:46 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/chinas-huawei-poised-overcome-us-ban-with-return-5g-phones-research-firms-2023-07-12.html">China&#39;s Huawei poised to overcome US ban with return of 5G phones, research firms say</a> - Reuters (11:13 AM UTC)</li>
+            
+                <li><a href="/static/business_pages/lucid-delivers-1404-evs-second-quarter-2023-07-12.html">Lucid shares drop as deliveries take hit from Tesla&#39;s price war</a> - Reuters (5:26 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/futures-inch-up-cautious-optimism-ahead-inflation-data-2023-07-12.html">Nasdaq leads Wall St to higher close as CPI report lifts sentiment</a> - Reuters (8:29 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/dominos-says-it-is-partnering-with-uber-pizza-orders-delivery-2023-07-12.html">Domino&#39;s to start using Uber for food orders, shares surge</a> - Reuters (6:19 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/global-public-debt-hits-record-92-trillion-un-report-2023-07-12.html">Global public debt hits record $92 trillion, UN report says</a> - Reuters (3:43 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/barclays-wins-uk-supreme-court-case-over-push-payment-fraud-2023-07-12.html">Barclays wins UK Supreme Court case over push payment fraud</a> - Reuters (12:14 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/why-is-us-sec-reforming-money-market-funds-2023-07-12.html">Explainer: Why is the U.S. SEC reforming money market funds?</a> - Reuters (4:51 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/global-accounting-firms-set-up-shop-indias-smaller-cities-2023-07-12.html">Global accounting firms set up shop in India&#39;s smaller cities</a> - Reuters (3:55 AM UTC)</li>
+            
+                <li><a href="/static/business_pages/broadcom-wins-conditional-eu-antitrust-approval-buy-vmware-2023-07-12.html">Broadcom&#39;s $61 billion VMware deal wins conditional EU antitrust OK</a> - Reuters (3:47 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/dollar-slides-ahead-us-inflation-data-sterling-hits-15-month-peak-2023-07-12.html">US dollar stumbles, drops to more than one-year low as inflation eases in June</a> - Reuters (8:06 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/us-decide-whether-ok-gm-self-driving-car-deployment-plan-2023-07-12.html">US to decide on GM request to deploy self-driving cars</a> - Reuters (6:34 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/oil-flat-after-bigger-than-expected-build-us-crude-stockpiles-2023-07-12.html">Oil prices settle up as mild US inflation data calms fear of Fed rate hike</a> - Reuters (7:10 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/ftc-would-face-tough-appeal-microsoft-activision-order-experts-2023-07-11.html">FTC would face tough appeal of Microsoft-Activision order, experts say</a> - Reuters (July 11, 2023)</li>
+            
+                <li><a href="/static/business_pages/shopify-launch-ai-assistant-merchants-2023-07-12.html">Shopify to launch AI assistant for merchants</a> - Reuters (3:06 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/jpmorgan-plans-63-job-cuts-jersey-city-2023-07-11.html">JPMorgan plans to lay off 63 employees in Jersey City</a> - Reuters (12:53 AM UTC)</li>
+            
+                <li><a href="/static/business_pages/manhattan-office-markets-tough-outlook-persists-leaving-investors-sidelines-2023-07-12.html">(OFFICIAL) Manhattan office market&#39;s tough outlook persists, leaving investors on sidelines</a> - Reuters (9:00 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/us-sec-finalize-money-market-fund-reforms-aimed-boosting-resilience-2023-07-12.html">US SEC scraps contentious pricing proposal in final money market fund reforms</a> - Reuters (5:55 PM UTC)</li>
+            
+                <li><a href="/static/business_pages/us-lawmakers-seek-lower-biofuel-blending-compliance-costs-2023-07-12.html">US lawmakers seek to lower biofuel blending compliance costs</a> - Reuters (8:54 PM UTC)</li>
+            
+        </ul>
+    </div>
+</body>
+</html>

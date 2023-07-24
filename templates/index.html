@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="{{url_for('static', filename='stylesheets/style.css')}}">
+    <div class="header">
+        <h1><a href="{{ url_for('index')}}" class="simpl">Simpl News</a></h1>
+    </div>
+</head>
+<body>
+    <div class="container"> 
+        <ul class="sections">
+            <li class="section"><h3><a href="{{ url_for('world')}}">World</a></h3></li>
+            <li class="section"><h3><a href="{{ url_for('business')}}">Business</a></h3></li>
+            <li class="section"><h3><a href="{{ url_for('technology')}}">Technology</a></h3></li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <link rel="stylesheet" href="/static/stylesheets/style.css">
+    <div class="header">
+        <h1><a href="/" class="simpl">Simpl News</a></h1>
+    </div>
+</head>
+<body>
+    <div class="container">
+        <h2><a href="/world" class="section-title">World</a></h2>
+        <ul>
+            
+                <li><a href="/static/world_pages/bbc-presenter-facing-sex-photo-claims-is-huw-edwards-bbc-says-citing-his-wife-2023-07-12.html">BBC presenter at centre of sex photo scandal named as lead anchor Edwards</a> - Reuters (8:12 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/russian-hackers-lured-embassy-workers-ukraine-with-an-ad-cheap-bmw-2023-07-12.html">Russian hackers lured embassy workers in Ukraine with a cheap ad for a BMW </a> - Reuters (8:24 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/russian-spy-chief-says-he-held-ukraine-call-with-cia-head-tass-2023-07-12.html">Russian spy chief says he spoke to CIA boss about Ukraine</a> - Reuters (4:49 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/hollywood-studios-racing-avoid-actors-strike-midnight-2023-07-12.html">Hollywood studios race to avoid actors&#39; strike at midnight</a> - Reuters (9:02 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/russia-is-rotting-absurdity-repression-veteran-rights-campaigner-says-2023-07-12.html">Exclusive: Russia is rotting in absurdity and repression, veteran rights campaigner says</a> - Reuters (7:42 AM UTC)</li>
+            
+                <li><a href="/static/world_pages/un-chief-sends-putin-proposal-keep-black-sea-grain-deal-alive-2023-07-12.html">UN asks Putin to extend Black Sea grain deal in return for SWIFT access -sources</a> - Reuters (9:02 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/urging-gratitude-weapons-uk-defence-minister-tells-ukraine-were-not-amazon-2023-07-12.html">Urging gratitude on weapons, UK tells Ukraine: &#39;We&#39;re not Amazon&#39;</a> - Reuters (4:04 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/us-treasury-sanctions-10-allegedly-involved-sinaloa-cartel-fentanyl-network-2023-07-12.html">US slaps sanctions on Sinaloa Cartel fentanyl network</a> - Reuters (5:17 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/senators-offer-bill-block-any-us-president-leaving-nato-2023-07-12.html">Senators offer bill to block any U.S. president from leaving NATO</a> - Reuters (3:48 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/germany-tells-un-nord-stream-inquiry-found-subsea-explosive-traces-yacht-2023-07-11.html">Germany tells UN: Nord Stream inquiry found subsea explosive traces on yacht</a> - Reuters (July 11, 2023)</li>
+            
+                <li><a href="/static/world_pages/china-opposes-natos-move-into-asia-pacific-region-warns-resolute-response-2023-07-12.html">China lashes back at NATO criticism, warns it will protect its rights</a> - Reuters (6:04 AM UTC)</li>
+            
+                <li><a href="/static/world_pages/dispute-over-chinas-embassy-london-strains-ties-with-britain-2023-07-12.html">Insight: Dispute over China&#39;s embassy in London strains ties with Britain</a> - Reuters (5:45 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/spurned-nato-invitation-ukraine-still-reaps-rewards-summit-2023-07-12.html">Factbox: Denied a NATO invitation, Ukraine still reaps rewards at summit</a> - Reuters (1:38 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/india-restricts-import-plain-gold-jewellery-2023-07-12.html">India restricts imports of plain gold jewellery</a> - Reuters (5:53 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/hottest-spots-us-heat-wave-blankets-southwest-2023-07-12.html">Factbox: Hottest spots in U.S. as heat wave blankets Southwest</a> - Reuters (6:41 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/italian-artist-pistolettos-venus-rags-destroyed-by-fire-naples-2023-07-12.html">Italian artist Pistoletto&#39;s &#39;Venus of the Rags&#39; destroyed in arson attack</a> - Reuters (10:29 AM UTC)</li>
+            
+                <li><a href="/static/world_pages/north-korea-fires-ballistic-missile-12th-this-year-skorea-2023-07-12.html">North Korea fires ICBM as South Korea, Japan leaders meet at NATO</a> - Reuters (7:59 PM UTC)</li>
+            
+                <li><a href="/static/world_pages/us-southwest-broils-prolonged-heat-wave-stretches-coast-coast-2023-07-12.html">US Southwest mired in heat wave that could topple records</a> - Reuters (8:14 PM UTC)</li>
+            
+        </ul>
+    </div>
+</body>
+</html>
