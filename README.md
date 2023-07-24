@@ -5,3 +5,4 @@ Websites scraped (this will increase):
 
 1. Reuters
 
+P.S. I believe the legality of this actually being a hosted website is dubious, so please understand that before using this code for anything
