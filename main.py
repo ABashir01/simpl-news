@@ -1,10 +1,11 @@
 from scraper import ReutersScraper
 import flask
 import flask_frozen
-import apscheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 import datetime
 
 full_map = {}
+reuters_scraper = ReutersScraper()
 
 app = flask.Flask(__name__)
 freezer = flask_frozen.Freezer(app)
@@ -32,8 +33,17 @@ def business():
     page_urls = full_map.get("business", {})
     return flask.render_template('business.html', page_urls = page_urls)
 
+def page_update():
+    print("Updating Pages")
+    full_map.update(reuters_scraper.page_combiner())
+
+def page_update_scheduler():
+    scheduler = BackgroundScheduler()
+    start_time = datetime.datetime.now().replace(second=0, microsecond=0) + datetime.timedelta(hours=1)
+    scheduler.add_job(func= page_update, trigger='cron', hour=start_time.hour)
+    scheduler.start() 
+
 if __name__ == "__main__":
-    reuters_scraper = ReutersScraper()
-    full_map.update(reuters_scraper.page_combiner()) 
+    page_update_scheduler()
     app.run(debug=True)
     
